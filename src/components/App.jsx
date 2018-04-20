@@ -1,7 +1,16 @@
-import React from "react";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 function App(){
-  return();
+  return(
+    <div>
+      <Header/>
+      <Switch>
+        <Route exact path='/' component={KegList}/>
+        <Route component={Error404} />
+      </Switch>
+    </div>
+  );
 }
 
 export default App;
