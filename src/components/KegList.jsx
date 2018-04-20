@@ -1,12 +1,13 @@
 import React from 'react';
 import Keg from './Keg';
+import { Panel } from 'react-bootstrap';
 
 function KegList() {
   return(
     <div>
       <div className="container">
-        <div className="col-md-3"></div>
         <div className="col-md-6">
+          <Panel style={ListStyling}>
           <h2>Beers on Tap:</h2>
           <hr/>
           {masterKegList.map((keg, index) =>
@@ -18,10 +19,17 @@ function KegList() {
             pints={keg.pints}
             key={index}/>
         )}
+      </Panel>
         </div>
       </div>
     </div>
   );
+}
+
+//STYLING AND MOCK DATA BELOW
+
+var ListStyling = {
+  textAlign: 'center'
 }
 
 const masterKegList = [
