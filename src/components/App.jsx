@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import KegList from './KegList';
 import Error404 from './Error404';
 import Header from './Header';
+import Footer from './Footer';
+import ContactUs from './ContactUs';
 import backgroundimg from '../assets/img/drews-brewsbg.jpg';
 
 function App(){
@@ -11,8 +13,10 @@ function App(){
       <Header/>
       <Switch>
         <Route exact path='/' component={KegList}/>
-        <Route component={Error404} />
+        <Route path='/error' component={Error404} />
+        <Route path='/contact' component={ContactUs}/>
       </Switch>
+      <Footer/>
     </div>
   );
 }
