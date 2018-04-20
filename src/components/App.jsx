@@ -1,5 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import KegList from './KegList';
+import Error404 from './Error404';
+import Header from './Header';
 
 function App(){
   return(
