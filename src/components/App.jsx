@@ -5,16 +5,19 @@ import Error404 from './Error404';
 import Header from './Header';
 import Footer from './Footer';
 import ContactUs from './ContactUs';
-import backgroundimg from '../assets/img/drews-brewsbg.jpg';
+import Carousel from './Carousel';
+import NewKegControl from './NewKegControl';
 
 function App(){
   return(
     <div style={backgroundStyling}>
       <Header/>
+      <Carousel/>
       <Switch>
         <Route exact path='/' component={KegList}/>
         <Route path='/error' component={Error404} />
         <Route path='/contact' component={ContactUs}/>
+        <Route path='/newkeg' component={NewKegControl}/>
       </Switch>
       <Footer/>
     </div>
@@ -22,7 +25,6 @@ function App(){
 }
 
 var backgroundStyling = {
-  backgroundImage: `url(${backgroundimg})`,
   backgroundSize: 'cover'
 
 }
