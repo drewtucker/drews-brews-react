@@ -1,14 +1,14 @@
 import React from 'react';
 import beerBanner from '../assets/img/drews-brews-banner.jpeg';
 import dbIcon from '../assets/img/dbicon.jpg';
-
+import { Link } from 'react-router-dom';
 function Header() {
   return(
     <div>
       <div style={navStyles}>
-        <img style={ImageStyles} src={dbIcon}></img>
+      <Link to='/'><img style={ImageStyles} src={dbIcon}></img></Link>
         <p></p>
-        <a style={centerStyling}>Beers on Tap</a>
+        <Link to='/kegs' style={centerStyling}><a>Beers on Tap</a></Link>
         <a style={centerStyling}>Add a Keg</a>
       </div>
 
@@ -47,6 +47,7 @@ var navStyles = {
 var centerStyling = {
   marginTop: 'auto',
   marginBottom: 'auto',
+  letterSpacing: '1.5px',
 }
 
 var ImageStyles = {

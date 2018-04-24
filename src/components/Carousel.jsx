@@ -2,9 +2,12 @@ import React from 'react';
 import $ from 'jquery';
 import Slider from "react-slick";
 import slide1 from '../assets/img/slide1.jpeg';
-import slide2 from '../assets/img/slide2.jpeg';
-import slide3 from '../assets/img/slide3.jpeg';
+import slide2 from '../assets/img/slide2.jpg';
+import slide3 from '../assets/img/slide3.jpg';
 import slide4 from '../assets/img/slide4.jpeg';
+import slide5 from '../assets/img/slide5.jpg';
+import { Panel } from 'react-bootstrap';
+
 class Carousel extends React.Component {
   render(){
     var carouselSettings = {
@@ -22,9 +25,10 @@ class Carousel extends React.Component {
   return(
     <div>
       <div className='container'>
-        <div className='col-md-4'>
-
-      <Slider style={CarouselStyles} className="myCarousel">
+        <div className='col-md-1'></div>
+        <div className='col-md-8'>
+      <Panel style={PanelStyles}>
+      <Slider className="myCarousel">
         <div>
           <img style={ImageStyles} src={slide1}></img>
         </div>
@@ -37,7 +41,11 @@ class Carousel extends React.Component {
         <div>
           <img style={ImageStyles} src={slide4}></img>
         </div>
+        <div>
+          <img style={ImageStyles} src={slide5}></img>
+        </div>
       </Slider>
+    </Panel>
     </div>
     </div>
     </div>
@@ -50,12 +58,12 @@ var ImageStyles = {
   maxHeight: '456px',
   margin: 'auto',
   minWidth: '100%',
-
-
 }
 
-var CarouselStyles = {
-  backgroundColor: 'gray'
+var PanelStyles = {
+  padding: '30px',
+  backgroundColor: '#272626',
 }
+
 
 export default Carousel;
