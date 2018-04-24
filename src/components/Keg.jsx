@@ -6,7 +6,7 @@ function Keg(props) {
     <div>
       <h3><span style={BeerNameStyling}>{props.name}</span> by: {props.brewery}</h3>
       <h5>Alcohol Content: {props.alcoholContent}%</h5>
-      <h4>${props.price}.00</h4>
+      <h4>${props.price}</h4>
       <h6>{props.pints} pints remaining</h6>
       <hr/>
     </div>
@@ -18,8 +18,18 @@ Keg.propTypes = {
   brewery: PropTypes.string,
   price: PropTypes.number,
   alcoholContent: PropTypes.number,
-  pints: PropTypes.number = 124
+  pints: PropTypes.number
 };
+
+Keg.defaultProps = {
+  pints: 124
+};
+
+
+function sellPint(keg){
+  this.pints --;
+};
+
 
 //STYLING OBJECTS
 

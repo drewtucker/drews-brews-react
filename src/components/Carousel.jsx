@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import Slider from "react-slick";
 import slide1 from '../assets/img/slide1.jpeg';
 import slide2 from '../assets/img/slide2.jpg';

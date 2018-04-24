@@ -9,7 +9,7 @@ function Header() {
       <Link to='/'><img style={ImageStyles} src={dbIcon}></img></Link>
         <p></p>
         <Link to='/kegs' style={centerStyling}><a>Beers on Tap</a></Link>
-        <a style={centerStyling}>Add a Keg</a>
+      <Link to='/newkeg' style={centerStyling}><a >Add a Keg</a></Link>
       </div>
 
       <hr/>
