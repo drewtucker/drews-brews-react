@@ -2,6 +2,7 @@ import React from 'react';
 import Keg from './Keg';
 import { Panel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 function KegList(props) {
   return(
@@ -18,6 +19,7 @@ function KegList(props) {
             price={keg.price}
             alcoholContent={keg.alcoholContent}
             pints={keg.pints}
+            formattedTimeAdded={keg.formattedTimeAdded}
             key={keg.id}/>
         )}
       </Panel>

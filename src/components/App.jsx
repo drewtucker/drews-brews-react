@@ -7,6 +7,7 @@ import Footer from './Footer';
 import ContactUs from './ContactUs';
 import Carousel from './Carousel';
 import NewKegControl from './NewKegControl';
+import Moment from 'moment';
 
 class App extends React.Component{
 
@@ -36,9 +37,30 @@ class App extends React.Component{
 
 handleAddingNewKegToList(newKeg){
   var newMasterKegList = this.state.masterKegList.slice();
+  newKeg.formattedTimeAdded = (newKeg.timeAdded).fromNow(true)
   newMasterKegList.push(newKeg);
   this.setState({masterKegList: newMasterKegList});
 }
+
+componentDidMount(){
+  this.timeAddedUpdateTimer = setInterval(() =>
+    this.updateKegElapsedWaitTime(),
+    5000
+  );
+}
+
+componentWillUnmount() {
+  clearInterval(this.timeAddedUpdateTimer);
+}
+
+updateKegElapsedWaitTime() {
+  let newMasterKegList = this.state.masterKegList.slice();
+  newMasterKegList.forEach((keg) =>
+    keg.formattedTimeAdded = (keg.timeAdded).fromNow(true)
+  );
+  this.setState({masterKegList: newMasterKegList})
+}
+
 }
 
 var backgroundStyling = {

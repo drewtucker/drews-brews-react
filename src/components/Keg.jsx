@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 function Keg(props) {
   return(
@@ -8,17 +9,20 @@ function Keg(props) {
       <h5>Alcohol Content: {props.alcoholContent}%</h5>
       <h4>${props.price}</h4>
       <h6>{props.pints} pints remaining</h6>
+      <h6>Added {props.formattedTimeAdded} ago</h6>
       <hr/>
     </div>
   );
 }
 
+
 Keg.propTypes = {
   name: PropTypes.string,
   brewery: PropTypes.string,
-  price: PropTypes.number,
-  alcoholContent: PropTypes.number,
-  pints: PropTypes.number
+  price: PropTypes.string,
+  alcoholContent: PropTypes.string,
+  pints: PropTypes.number,
+  formattedTimeAdded: PropTypes.string.isRequired
 };
 
 Keg.defaultProps = {
