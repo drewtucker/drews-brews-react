@@ -18,6 +18,6 @@ function Footer() {
 var FooterStyles = {
   textAlign: 'center',
   color: 'white',
-}
+};
 
 export default Footer;

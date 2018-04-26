@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from "react-slick";
+import Slider from 'react-slick';
 import slide1 from '../assets/img/slide1.jpeg';
 import slide2 from '../assets/img/slide2.jpg';
 import slide3 from '../assets/img/slide3.jpg';
@@ -27,7 +27,7 @@ class Carousel extends React.Component {
         <div className='col-md-1'></div>
         <div className='col-md-8'>
       <Panel style={PanelStyles}>
-      <Slider className="myCarousel">
+      <Slider className='myCarousel'>
         <div>
           <img style={ImageStyles} src={slide1}></img>
         </div>
@@ -57,12 +57,12 @@ var ImageStyles = {
   maxHeight: '456px',
   margin: 'auto',
   minWidth: '100%',
-}
+};
 
 var PanelStyles = {
   padding: '30px',
   backgroundColor: '#272626',
-}
+};
 
 
 export default Carousel;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'moment';
 
 function Keg(props) {
-  return(
+  console.log(props.currentRouterPath);
+  const kegInformation =
     <div>
       <h3><span style={BeerNameStyling}>{props.name}</span> by: {props.brewery}</h3>
       <h5>Alcohol Content: {props.alcoholContent}%</h5>
@@ -11,8 +11,20 @@ function Keg(props) {
       <h6>{props.pints} pints remaining</h6>
       <h6>Added {props.formattedTimeAdded} ago</h6>
       <hr/>
-    </div>
-  );
+    </div>;
+    if (props.currentRouterPath === '/admin'){
+      return (
+        <div onClick={() => {props.onKegSelection(props.kegId);}}>
+          {kegInformation}
+        </div>
+      );
+    } else {
+      return(
+        <div>
+          {kegInformation}
+        </div>
+      );
+    }
 }
 
 
@@ -22,7 +34,10 @@ Keg.propTypes = {
   price: PropTypes.string,
   alcoholContent: PropTypes.string,
   pints: PropTypes.number,
-  formattedTimeAdded: PropTypes.string.isRequired
+  formattedTimeAdded: PropTypes.string.isRequired,
+  currentRouterPath: PropTypes.string,
+  onKegSelection: PropTypes.func,
+  kegId: PropTypes.string.isRequired
 };
 
 Keg.defaultProps = {
@@ -30,15 +45,15 @@ Keg.defaultProps = {
 };
 
 
-function sellPint(keg){
-  this.pints --;
-};
+// function sellPint(keg){
+//   this.pints --;
+// };
 
 
 //STYLING OBJECTS
 
 var BeerNameStyling = {
   color: 'tomato'
-}
+};
 
 export default Keg;

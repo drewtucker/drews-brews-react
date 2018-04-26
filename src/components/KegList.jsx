@@ -2,7 +2,6 @@ import React from 'react';
 import Keg from './Keg';
 import { Panel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Moment from 'moment';
 
 function KegList(props) {
   return(
@@ -12,16 +11,20 @@ function KegList(props) {
           <Panel style={ListStyling}>
           <h2>Beers on Tap:</h2>
           <hr/>
-          {props.kegList.map((keg, index) =>
-          <Keg
+          {Object.keys(props.kegList).map(function(kegId){
+            var keg = props.kegList[kegId];
+            return <Keg
             name={keg.name}
             brewery={keg.brewery}
             price={keg.price}
             alcoholContent={keg.alcoholContent}
             pints={keg.pints}
             formattedTimeAdded={keg.formattedTimeAdded}
-            key={keg.id}/>
-        )}
+            currentRouterPath={props.currentRouterPath}
+            key={kegId}
+            kegId={kegId}
+            onKegSelection={props.onKegSelection}/>
+        })}
       </Panel>
         </div>
       </div>
@@ -29,14 +32,17 @@ function KegList(props) {
   );
 }
 
-//STYLING AND MOCK DATA BELOW
+KegList.propTypes = {
+  kegList: PropTypes.object,
+  currentRouterPath: PropTypes.string,
+  onKegSelection: PropTypes.func
+};
+
+
+//STYLING
 
 var ListStyling = {
   textAlign: 'center'
-}
-
-KegList.propTypes = {
-  kegList: PropTypes.array
 };
 
 

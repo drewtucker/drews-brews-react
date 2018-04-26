@@ -19,6 +19,6 @@ function ContactUs() {
 
 var ContactStyles = {
   textAlign: 'center',
-}
+};
 
 export default ContactUs;

@@ -4,19 +4,23 @@ import KegList from './KegList';
 import Error404 from './Error404';
 import Header from './Header';
 import Footer from './Footer';
+import Admin from './Admin';
+import KegDetail from './KegDetail';
 import ContactUs from './ContactUs';
 import Carousel from './Carousel';
 import NewKegControl from './NewKegControl';
-import Moment from 'moment';
+import { v4 } from 'uuid';
 
 class App extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
-      masterKegList: []
+      masterKegList: {},
+      selectedKeg: null
     };
     this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
+    this.handleChangingSelectedKeg = this.handleChangingSelectedKeg.bind(this);
   }
   render(){
 
@@ -29,6 +33,7 @@ class App extends React.Component{
           <Route path='/error' component={Error404} />
           <Route path='/contact' component={ContactUs}/>
           <Route path='/newkeg' render={()=><NewKegControl onNewKegCreation={this.handleAddingNewKegToList}/>} />
+          <Route path='/admin' render={(props)=><Admin kegList={this.state.masterKegList} currentRouterPath={props.location.pathname} onKegSelection={this.handleChangingSelectedKeg} selectedKeg={this.state.selectedKeg}/>} />
         </Switch>
         <Footer/>
       </div>
@@ -36,9 +41,11 @@ class App extends React.Component{
   }
 
 handleAddingNewKegToList(newKeg){
-  var newMasterKegList = this.state.masterKegList.slice();
-  newKeg.formattedTimeAdded = (newKeg.timeAdded).fromNow(true)
-  newMasterKegList.push(newKeg);
+  var newKegId = v4()
+  var newMasterKegList = Object.assign({}, this.state.masterKegList, {
+    [newKegId]: newKeg
+  });
+  newMasterKegList[newKegId].formattedTimeAdded = newMasterKegList[newKegId].timeOpen.fromNow(true);
   this.setState({masterKegList: newMasterKegList});
 }
 
@@ -54,11 +61,15 @@ componentWillUnmount() {
 }
 
 updateKegElapsedWaitTime() {
-  let newMasterKegList = this.state.masterKegList.slice();
-  newMasterKegList.forEach((keg) =>
-    keg.formattedTimeAdded = (keg.timeAdded).fromNow(true)
-  );
-  this.setState({masterKegList: newMasterKegList})
+  let newMasterKegList = Object.assign({}, this.state.masterKegList);
+  Object.keys(newMasterKegList).forEach(kegId => {
+    newMasterKegList[kegId].formattedTimeAdded = (newMasterKegList[kegId].timeAdded).fromNow(true);
+  });
+  this.setState({masterKegList: newMasterKegList});
+}
+
+handleChangingSelectedKeg(kegId){
+  this.setState({selectedKeg: kegId});
 }
 
 }
@@ -66,33 +77,6 @@ updateKegElapsedWaitTime() {
 var backgroundStyling = {
   backgroundSize: 'cover'
 
-}
-
-const masterKegList = [
-  {
-    name: 'Wud Light',
-    brewery: 'WudBeiser',
-    price: 5,
-    alcoholContent: 4.5
-  },
-  {
-    name: 'Lagoonitas',
-    brewery: 'Dalmation Brewing Co.',
-    price: 6,
-    alcoholContent: 7
-  },
-  {
-    name: 'Filler Light',
-    brewery: 'Filler Brews',
-    price: 3,
-    alcoholContent: 4
-  },
-  {
-    name: 'Steves Stout',
-    brewery: 'Steve Stevenson Brewery',
-    price: 8,
-    alcoholContent: 8
-  }
-]
+};
 
 export default App;

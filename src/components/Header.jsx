@@ -8,8 +8,8 @@ function Header() {
       <div style={navStyles}>
       <Link to='/'><img style={ImageStyles} src={dbIcon}></img></Link>
         <p></p>
-        <Link to='/kegs' style={centerStyling}><a>Beers on Tap</a></Link>
-      <Link to='/newkeg' style={centerStyling}><a >Add a Keg</a></Link>
+        <Link to='/kegs' style={centerStyling}>Beers on Tap</Link>
+      <Link to='/newkeg' style={centerStyling}>Add a Keg</Link>
       </div>
 
       <hr/>
@@ -24,15 +24,15 @@ function Header() {
 
 var HeaderStyles = {
   textAlign: 'center',
-  padding: '50',
+  padding: '50px',
   color: 'white',
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 1fr 1fr',
   backgroundImage: `url(${beerBanner})`,
   backgroundSize: 'cover',
   backgroundPosition: '50% 25%',
-  marginTop: '0',
-}
+  marginTop: '0px',
+};
 
 var navStyles = {
   display: 'grid',
@@ -42,18 +42,18 @@ var navStyles = {
   marginBottom: 'auto',
   fontSize: '2rem'
 
-}
+};
 
 var centerStyling = {
   marginTop: 'auto',
   marginBottom: 'auto',
   letterSpacing: '1.5px',
-}
+};
 
 var ImageStyles = {
   height: '120px',
   width: '120px',
   padding: '0',
   margin: '0'
-}
+};
 export default Header;

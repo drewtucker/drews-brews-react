@@ -27,6 +27,6 @@ ConfirmationQuestions.propTypes = {
 var PanelStyles = {
   textAlign: 'center',
 
-}
+};
 
 export default ConfirmationQuestions;
