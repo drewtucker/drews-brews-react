@@ -23,9 +23,8 @@ class Carousel extends React.Component {
 
   return(
     <div>
-      <div className='container'>
-        <div className='col-md-1'></div>
-        <div className='col-md-8'>
+      <div className='container-fluid'>
+        <div >
       <Panel style={PanelStyles}>
       <Slider className='myCarousel'>
         <div>
@@ -54,7 +53,9 @@ class Carousel extends React.Component {
 }
 
 var ImageStyles = {
-  maxHeight: '456px',
+  maxHeight: '60rem',
+  height: 'auto',
+  width: 'auto',
   margin: 'auto',
   minWidth: '100%',
 };
@@ -62,6 +63,8 @@ var ImageStyles = {
 var PanelStyles = {
   padding: '30px',
   backgroundColor: '#272626',
+  borderRadius: '8px',
+
 };
 
 

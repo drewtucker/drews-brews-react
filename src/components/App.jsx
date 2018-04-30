@@ -8,6 +8,7 @@ import Admin from './Admin';
 import KegDetail from './KegDetail';
 import ContactUs from './ContactUs';
 import Carousel from './Carousel';
+import AboutUs from './AboutUs';
 import NewKegControl from './NewKegControl';
 import { v4 } from 'uuid';
 
@@ -26,8 +27,16 @@ class App extends React.Component{
 
     return(
       <div style={backgroundStyling}>
+        <style global jsx>{`
+            .container-fluid {
+              padding: 0px
+            }
+            `}</style>
         <Header/>
         <Route exact path='/' component={Carousel}/>
+        <div className='row'>
+          <Route exact path='/' component={AboutUs}/>
+        </div>
         <Switch>
           <Route path='/kegs' render={()=><KegList kegList={this.state.masterKegList}/>}/>
           <Route path='/error' component={Error404} />
@@ -35,6 +44,7 @@ class App extends React.Component{
           <Route path='/newkeg' render={()=><NewKegControl onNewKegCreation={this.handleAddingNewKegToList}/>} />
           <Route path='/admin' render={(props)=><Admin kegList={this.state.masterKegList} currentRouterPath={props.location.pathname} onKegSelection={this.handleChangingSelectedKeg} selectedKeg={this.state.selectedKeg}/>} />
         </Switch>
+
         <Footer/>
       </div>
     );
@@ -45,7 +55,7 @@ handleAddingNewKegToList(newKeg){
   var newMasterKegList = Object.assign({}, this.state.masterKegList, {
     [newKegId]: newKeg
   });
-  newMasterKegList[newKegId].formattedTimeAdded = newMasterKegList[newKegId].timeOpen.fromNow(true);
+  newMasterKegList[newKegId].formattedTimeAdded = newMasterKegList[newKegId].timeAdded.fromNow(true);
   this.setState({masterKegList: newMasterKegList});
 }
 
