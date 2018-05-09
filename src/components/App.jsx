@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import KegList from './KegList';
 import Error404 from './Error404';
 import Header from './Header';
@@ -11,13 +11,15 @@ import Carousel from './Carousel';
 import AboutUs from './AboutUs';
 import NewKegControl from './NewKegControl';
 import { v4 } from 'uuid';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 class App extends React.Component{
 
   constructor(props) {
     super(props);
     this.state = {
-      masterKegList: {},
       selectedKeg: null
     };
     this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
@@ -38,11 +40,11 @@ class App extends React.Component{
           <Route exact path='/' component={AboutUs}/>
         </div>
         <Switch>
-          <Route path='/kegs' render={()=><KegList kegList={this.state.masterKegList}/>}/>
+          <Route path='/kegs' render={()=><KegList kegList={this.props.masterKegList}/>}/>
           <Route path='/error' component={Error404} />
           <Route path='/contact' component={ContactUs}/>
           <Route path='/newkeg' render={()=><NewKegControl onNewKegCreation={this.handleAddingNewKegToList}/>} />
-          <Route path='/admin' render={(props)=><Admin kegList={this.state.masterKegList} currentRouterPath={props.location.pathname} onKegSelection={this.handleChangingSelectedKeg} selectedKeg={this.state.selectedKeg}/>} />
+          <Route path='/admin' render={(props)=><Admin kegList={this.props.masterKegList} currentRouterPath={props.location.pathname} onKegSelection={this.handleChangingSelectedKeg} selectedKeg={this.state.selectedKeg}/>} />
         </Switch>
 
         <Footer/>
@@ -71,11 +73,11 @@ componentWillUnmount() {
 }
 
 updateKegElapsedWaitTime() {
-  let newMasterKegList = Object.assign({}, this.state.masterKegList);
-  Object.keys(newMasterKegList).forEach(kegId => {
-    newMasterKegList[kegId].formattedTimeAdded = (newMasterKegList[kegId].timeAdded).fromNow(true);
-  });
-  this.setState({masterKegList: newMasterKegList});
+  // let newMasterKegList = Object.assign({}, this.state.masterKegList);
+  // Object.keys(newMasterKegList).forEach(kegId => {
+  //   newMasterKegList[kegId].formattedTimeAdded = (newMasterKegList[kegId].timeAdded).fromNow(true);
+  // });
+  // this.setState({masterKegList: newMasterKegList});
 }
 
 handleChangingSelectedKeg(kegId){
@@ -84,9 +86,21 @@ handleChangingSelectedKeg(kegId){
 
 }
 
+//APP GENERAL STYLING
 var backgroundStyling = {
   backgroundSize: 'cover'
-
 };
 
-export default App;
+//MAP STATE TO PROPS
+const mapStateToProps = state => {
+  return {
+    masterKegList: state
+  }
+}
+
+//APP PROPTYPES
+App.propTypes = {
+  masterKegList: PropTypes.object
+}
+
+export default withRouter(connect()(App));
