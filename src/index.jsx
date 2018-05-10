@@ -6,11 +6,13 @@ import { HashRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import kegListReducer from './reducers/keg-list-reducer';
+import rootReducer from './reducers/index';
 
-const store = createStore(kegListReducer);
+
+const store = createStore(rootReducer);
 
 let unsubscribe = store.subscribe(() => {
-  console.log(store.getState())
+  // console.log(store.getState())
 })
 
 const render = (Component) => {

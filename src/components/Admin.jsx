@@ -2,10 +2,12 @@ import React from 'react';
 import KegList from './KegList';
 import KegDetail from './KegDetail';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 function Admin(props){
   let optionalSelectedKegContent = null;
-  if (props.selectedKeg != null){
+  if (props.selectedKeg.length > 0){
     optionalSelectedKegContent = <KegDetail selectedKeg={props.kegList[props.selectedKeg]}/>;
   }
   return (
@@ -14,17 +16,22 @@ function Admin(props){
       {optionalSelectedKegContent}
       <KegList
         kegList={props.kegList}
-        currentRouterPath={props.currentRouterPath}
-        onKegSelection={props.onKegSelection}/>
+        currentRouterPath={props.currentRouterPath}/>
     </div>
   );
 }
 
 Admin.propTypes = {
-  kegList: PropTypes.array,
+  kegList: PropTypes.object,
   currentRouterPath: PropTypes.string.isRequired,
-  onKegSelection: PropTypes.func.isRequired,
   selectedKeg: PropTypes.string
 };
 
-export default Admin;
+const mapStateToProps = state => {
+  return {
+    selectedKeg: state.selectedKeg,
+    kegList: state.masterKegList
+  };
+};
+
+export default connect(mapStateToProps)(Admin);

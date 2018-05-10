@@ -22,7 +22,8 @@ function NewKegForm(props) {
       brewery: _brewery.value,
       alcoholContent: _alcoholContent.value,
       price: _price.value,
-      timeAdded: new Moment()
+      timeAdded: new Moment(),
+      formattedTimeAdded: new Moment().fromNow(true)
     };
     dispatch(action);
     _name.value = '';

@@ -22,8 +22,7 @@ function KegList(props) {
             formattedTimeAdded={keg.formattedTimeAdded}
             currentRouterPath={props.currentRouterPath}
             key={kegId}
-            kegId={kegId}
-            onKegSelection={props.onKegSelection}/>
+            kegId={kegId}/>
         })}
       </Panel>
         </div>
@@ -35,7 +34,6 @@ function KegList(props) {
 KegList.propTypes = {
   kegList: PropTypes.object,
   currentRouterPath: PropTypes.string,
-  onKegSelection: PropTypes.func
 };
 
 

@@ -17,13 +17,7 @@ import PropTypes from 'prop-types';
 
 class App extends React.Component{
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedKeg: null
-    };
-    this.handleChangingSelectedKeg = this.handleChangingSelectedKeg.bind(this);
-  }
+
   render(){
 
     return(
@@ -43,10 +37,8 @@ class App extends React.Component{
           <Route path='/error' component={Error404} />
           <Route path='/contact' component={ContactUs}/>
           <Route path='/newkeg' render={()=><NewKegControl/>} />
-          <Route path='/admin' render={(props)=><Admin kegList={this.props.masterKegList}
-            currentRouterPath={props.location.pathname}
-            onKegSelection={this.handleChangingSelectedKeg}
-            selectedKeg={this.state.selectedKeg}/>} />
+          <Route path='/admin' render={(props)=><Admin
+            currentRouterPath={props.location.pathname}/>} />
         </Switch>
 
         <Footer/>
@@ -66,16 +58,19 @@ componentWillUnmount() {
 }
 
 updateKegElapsedWaitTime() {
-  // let newMasterKegList = Object.assign({}, this.state.masterKegList);
-  // Object.keys(newMasterKegList).forEach(kegId => {
-  //   newMasterKegList[kegId].formattedTimeAdded = (newMasterKegList[kegId].timeAdded).fromNow(true);
-  // });
-  // this.setState({masterKegList: newMasterKegList});
+  const { dispatch } = this.props;
+  Object.keys(this.props.masterKegList).map(kegId => {
+    const keg = this.props.masterKegList[kegId];
+    const newFormattedTimeAdded = keg.timeAdded.fromNow(true);
+    const action = {
+      type: 'UPDATE_TIME',
+      id: kegId,
+      formattedTimeAdded: newFormattedTimeAdded
+    };
+    dispatch(action);
+  });
 }
 
-handleChangingSelectedKeg(kegId){
-  this.setState({selectedKeg: kegId});
-}
 
 }
 
@@ -87,7 +82,7 @@ var backgroundStyling = {
 //MAP STATE TO PROPS
 const mapStateToProps = state => {
   return {
-    masterKegList: state
+    masterKegList: state.masterKegList
   }
 }
 

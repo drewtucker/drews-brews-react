@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 function Keg(props) {
-  console.log(props.currentRouterPath);
+  function handleSavingSelectedKeg(kegId) {
+    const { dispatch } = props;
+    const action = {
+      type: 'SELECT_KEG',
+      kegId: kegId
+    };
+    dispatch(action);
+  }
   const kegInformation =
     <div>
       <h3><span style={BeerNameStyling}>{props.name}</span> by: {props.brewery}</h3>
@@ -14,7 +22,7 @@ function Keg(props) {
     </div>;
     if (props.currentRouterPath === '/admin'){
       return (
-        <div onClick={() => {props.onKegSelection(props.kegId);}}>
+        <div onClick={() => {handleSavingSelectedKeg(props.kegId);}}>
           {kegInformation}
         </div>
       );
@@ -36,7 +44,6 @@ Keg.propTypes = {
   pints: PropTypes.number,
   formattedTimeAdded: PropTypes.string.isRequired,
   currentRouterPath: PropTypes.string,
-  onKegSelection: PropTypes.func,
   kegId: PropTypes.string.isRequired
 };
 
@@ -56,4 +63,4 @@ var BeerNameStyling = {
   color: 'tomato'
 };
 
-export default Keg;
+export default connect()(Keg);

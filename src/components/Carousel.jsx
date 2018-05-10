@@ -12,9 +12,9 @@ class Carousel extends React.Component {
     var carouselSettings = {
       infinite: true,
       autoplay: true,
-      variableWidth: true,
-      adaptiveHeight: true,
-      autoplaySpeed: 500,
+      variableWidth: false,
+      adaptiveHeight: false,
+      autoplaySpeed: 5000,
       slidesToShow: 1,
       slidesToScroll: 1,
       fade: true,
@@ -26,7 +26,7 @@ class Carousel extends React.Component {
       <div className='container-fluid'>
         <div >
       <Panel style={PanelStyles}>
-      <Slider className='myCarousel'>
+      <Slider className='myCarousel' {...carouselSettings}>
         <div>
           <img style={ImageStyles} src={slide1}></img>
         </div>
