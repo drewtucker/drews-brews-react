@@ -2,6 +2,9 @@ import React from 'react';
 import { Panel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
+import { connect } from 'react-redux';
+import { v4 } from 'uuid';
+
 
 function NewKegForm(props) {
   let _name = null;
@@ -10,8 +13,18 @@ function NewKegForm(props) {
   let _price = null;
 
   function handleNewKegFormSubmission(event){
+    const { dispatch } = props;
     event.preventDefault();
-    props.onNewKegCreation({name: _name.value, brewery: _brewery.value, alcoholContent: _alcoholContent.value, price: _price.value, timeAdded: new Moment()});
+    const action = {
+      type: 'ADD_KEG',
+      id: v4(),
+      name: _name.value,
+      brewery: _brewery.value,
+      alcoholContent: _alcoholContent.value,
+      price: _price.value,
+      timeAdded: new Moment()
+    };
+    dispatch(action);
     _name.value = '';
     _brewery.value = '';
     _alcoholContent.value = '';
@@ -71,4 +84,4 @@ NewKegForm.propTypes = {
 };
 
 
-export default NewKegForm;
+export default connect()(NewKegForm);

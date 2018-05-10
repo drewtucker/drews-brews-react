@@ -22,7 +22,6 @@ class App extends React.Component{
     this.state = {
       selectedKeg: null
     };
-    this.handleAddingNewKegToList = this.handleAddingNewKegToList.bind(this);
     this.handleChangingSelectedKeg = this.handleChangingSelectedKeg.bind(this);
   }
   render(){
@@ -43,23 +42,17 @@ class App extends React.Component{
           <Route path='/kegs' render={()=><KegList kegList={this.props.masterKegList}/>}/>
           <Route path='/error' component={Error404} />
           <Route path='/contact' component={ContactUs}/>
-          <Route path='/newkeg' render={()=><NewKegControl onNewKegCreation={this.handleAddingNewKegToList}/>} />
-          <Route path='/admin' render={(props)=><Admin kegList={this.props.masterKegList} currentRouterPath={props.location.pathname} onKegSelection={this.handleChangingSelectedKeg} selectedKeg={this.state.selectedKeg}/>} />
+          <Route path='/newkeg' render={()=><NewKegControl/>} />
+          <Route path='/admin' render={(props)=><Admin kegList={this.props.masterKegList}
+            currentRouterPath={props.location.pathname}
+            onKegSelection={this.handleChangingSelectedKeg}
+            selectedKeg={this.state.selectedKeg}/>} />
         </Switch>
 
         <Footer/>
       </div>
     );
   }
-
-handleAddingNewKegToList(newKeg){
-  var newKegId = v4()
-  var newMasterKegList = Object.assign({}, this.state.masterKegList, {
-    [newKegId]: newKeg
-  });
-  newMasterKegList[newKegId].formattedTimeAdded = newMasterKegList[newKegId].timeAdded.fromNow(true);
-  this.setState({masterKegList: newMasterKegList});
-}
 
 componentDidMount(){
   this.timeAddedUpdateTimer = setInterval(() =>
@@ -103,4 +96,4 @@ App.propTypes = {
   masterKegList: PropTypes.object
 }
 
-export default withRouter(connect()(App));
+export default withRouter(connect(mapStateToProps)(App));
